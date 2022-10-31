@@ -91,11 +91,24 @@ public final class Menu {
 		PIZZAS = pizzas;
 	}
 	
-	public static int indexOf(String pizzaName) {
+	public static int pizzaIndexOf(String pizzaName) {
 		
 		for (int i = 0; i < PIZZAS.length; i++) {
 			
 			if (PIZZAS[i].name().equalsIgnoreCase(pizzaName)) {
+				
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
+	public static int toppingIndexOf(String toppingName) {
+		
+		for (int i = 0; i < TOPPINGS.length; i++) {
+			
+			if (TOPPINGS[i].name().equalsIgnoreCase(toppingName)) {
 				
 				return i;
 			}

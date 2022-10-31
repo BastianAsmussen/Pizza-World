@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -24,6 +25,8 @@ public class GUIApplication extends Application {
 		double height = visualBounds.getHeight() / 2;
 		
 		Scene scene = new Scene(fxmlLoader.load(), width, height);
+		
+		scene.setFill(Color.web("#424549"));
 		
 		stage.setTitle("Pizza World");
 		stage.centerOnScreen();

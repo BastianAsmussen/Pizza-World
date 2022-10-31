@@ -1,6 +1,7 @@
 package tech.asmussen.pizzaworld;
 
 import tech.asmussen.pizzaworld.menu.Menu;
+import tech.asmussen.pizzaworld.menu.Pizza;
 import tech.asmussen.pizzaworld.ui.GUIApplication;
 
 public class Main {
