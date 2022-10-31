@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.asmussen.pizzaworld.ui.GUIController">
+	<AnchorPane prefHeight="540" prefWidth="960">
+		<children>
+			<Label layoutX="725.0" layoutY="323.0" text="Total Pris">
+				<font>
+					<Font name="Arial" size="24.0" />
+				</font>
+			</Label>
+			<ListView fx:id="pizzaList" layoutX="14.0" layoutY="15.0" prefHeight="262.0" prefWidth="189.0" />
+			<Label layoutX="347.0" layoutY="40.0" text="Valgte Pizza">
+				<font>
+					<Font name="Arial" size="48.0" />
+				</font>
+			</Label>
+			<Label layoutX="347.0" layoutY="119.0" text="Navn">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+			<Label layoutX="347.0" layoutY="138.0" text="Indgretientser">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+			<Label layoutX="347.0" layoutY="190.0" text="Pris uden toppings">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+			<Label fx:id="currentPizzaName" layoutX="586.0" layoutY="119.0" text="Intet">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+			<Label fx:id="currentPizzaDescription" alignment="TOP_LEFT" layoutX="586.0" layoutY="135.0" prefHeight="55.0" prefWidth="165.0" text="Ingen" wrapText="true">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+			<Label fx:id="currentPizzaBasePrice" layoutX="586.0" layoutY="190.0" text="0 kr." textOverrun="WORD_ELLIPSIS">
+				<font>
+					<Font name="Arial" size="14.0" />
+				</font>
+			</Label>
+		</children>
+	</AnchorPane>
+</VBox>

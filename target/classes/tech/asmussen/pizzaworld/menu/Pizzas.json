@@ -1,0 +1,135 @@
+[
+  {
+    "id": 0,
+    "name": "Margerita",
+    "description": "Tomatsauce, ost, oregano og dobbelt ost.",
+    "price": 37.0,
+    "toppings": [
+      0,
+      11,
+      11
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Moro",
+    "description": "Tomatsauce, ost, skinke og oregano.",
+    "price": 37.0,
+    "toppings": [
+      0,
+      11,
+      12
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Carbona",
+    "description": "Tomatsauce, ost, kødsauce, spaghetti, cocktailpølser og oregano.",
+    "price": 59.0,
+    "toppings": [
+      0,
+      11,
+      15,
+      8,
+      20
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Hawaii (Aksel)",
+    "description": "Tomatsauce, ost, skinke, ananas og oregano.",
+    "price": 44.0,
+    "toppings": [
+      0,
+      11,
+      12,
+      6
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Vesuvio",
+    "description": "Tomatsauce, ost, skinke, pepperoni, cocktailpølser og oregano.",
+    "price": 67.0,
+    "toppings": [
+      0,
+      11,
+      12,
+      19,
+      20
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Pizza Bolognese",
+    "description": "Tomatsauce, ost, kødsauce, løg og oregano.",
+    "price": 44.0,
+    "toppings": [
+      0,
+      11,
+      15,
+      1
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Amerikaner",
+    "description": "Tomatsauce, ost, oksefars og oregano.",
+    "price": 37.0,
+    "toppings": [
+      0,
+      11,
+      18
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Capricciosa",
+    "description": "Tomatsauce, ost, skinke, champignon og oregano.",
+    "price": 29.0,
+    "toppings": [
+      0,
+      11,
+      5
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Husets Pizza",
+    "description": "Tomatsauce, ost, kebab, bearnaisesauce, æg, løg og oregano.",
+    "price": 43.0,
+    "toppings": [
+      0,
+      11,
+      0,
+      3,
+      1
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Boran",
+    "description": "Tomatsauce, ost, bacon, pepperoni, cocktailpølser og oregano.",
+    "price": 62.0,
+    "toppings": [
+      0,
+      11,
+      17,
+      10,
+      20
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Ali",
+    "description": "Tomatsauce, ost, kebab, oksefars, gorgonzola og oregano.",
+    "price": 67.0,
+    "toppings": [
+      0,
+      11,
+      13,
+      18,
+      23
+    ]
+  }
+]

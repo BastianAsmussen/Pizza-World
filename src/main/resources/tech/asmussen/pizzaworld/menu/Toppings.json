@@ -1,0 +1,157 @@
+[
+  {
+    "id": 0,
+    "name": "Alle dressinger",
+    "price": 7.0
+  },
+  {
+    "id": 1,
+    "name": "Løg",
+    "price": 7.0
+  },
+  {
+    "id": 2,
+    "name": "Asparges",
+    "price": 7.0
+  },
+  {
+    "id": 3,
+    "name": "Æg",
+    "price": 7.0
+  },
+  {
+    "id": 4,
+    "name": "Rød peber",
+    "price": 7.0
+  },
+  {
+    "id": 5,
+    "name": "Champignon",
+    "price": 7.0
+  },
+  {
+    "id": 6,
+    "name": "Ananas",
+    "price": 7.0
+  },
+  {
+    "id": 7,
+    "name": "Majs",
+    "price": 7.0
+  },
+  {
+    "id": 8,
+    "name": "Spaghetti",
+    "price": 7.0
+  },
+  {
+    "id": 9,
+    "name": "Pesto",
+    "price": 10.0
+  },
+  {
+    "id": 10,
+    "name": "Jalapenos",
+    "price": 10.0
+  },
+  {
+    "id": 11,
+    "name": "Ost",
+    "price": 15.0
+  },
+  {
+    "id": 12,
+    "name": "Skinke",
+    "price": 15.0
+  },
+  {
+    "id": 13,
+    "name": "Kebab",
+    "price": 15.0
+  },
+  {
+    "id": 14,
+    "name": "Rejer",
+    "price": 15.0
+  },
+  {
+    "id": 15,
+    "name": "Kødsauce",
+    "price": 15.0
+  },
+  {
+    "id": 16,
+    "name": "Tun",
+    "price": 15.0
+  },
+  {
+    "id": 17,
+    "name": "Stegt bacon",
+    "price": 15.0
+  },
+  {
+    "id": 18,
+    "name": "Oksekød",
+    "price": 15.0
+  },
+  {
+    "id": 19,
+    "name": "Pepperoni",
+    "price": 15.0
+  },
+  {
+    "id": 20,
+    "name": "Cocktailpølser",
+    "price": 15.0
+  },
+  {
+    "id": 21,
+    "name": "Salat",
+    "price": 15.0
+  },
+  {
+    "id": 22,
+    "name": "Kylling",
+    "price": 15.0
+  },
+  {
+    "id": 23,
+    "name": "Gorgonzola",
+    "price": 15.0
+  },
+  {
+    "id": 24,
+    "name": "Chorizo",
+    "price": 15.0
+  },
+  {
+    "id": 25,
+    "name": "Ekstra bund",
+    "price": 15.0
+  },
+  {
+    "id": 26,
+    "name": "Sucuk",
+    "price": 15.0
+  },
+  {
+    "id": 27,
+    "name": "Parmaskinke",
+    "price": 15.0
+  },
+  {
+    "id": 28,
+    "name": "Mozzarellaost",
+    "price": 15.0
+  },
+  {
+    "id": 29,
+    "name": "Bresaola",
+    "price": 30.0
+  },
+  {
+    "id": 30,
+    "name": "Chili/hvidløg eller dressing i bæger",
+    "price": 7.0
+  }
+]
