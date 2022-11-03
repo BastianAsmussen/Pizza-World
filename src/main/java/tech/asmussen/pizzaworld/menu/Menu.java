@@ -9,6 +9,9 @@ import com.google.gson.JsonArray;
 
 public final class Menu {
 	
+	public static final byte MAX_EXTRA_TOPPINGS = 5;
+	public static final byte MIN_EXTRA_TOPPINGS = 0;
+	
 	public static final Topping[] TOPPINGS;
 	public static final Pizza[] PIZZAS;
 	

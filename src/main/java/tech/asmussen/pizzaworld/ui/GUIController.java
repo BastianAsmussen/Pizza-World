@@ -2,7 +2,6 @@ package tech.asmussen.pizzaworld.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -11,197 +10,125 @@ import tech.asmussen.pizzaworld.menu.Pizza;
 import tech.asmussen.pizzaworld.menu.Topping;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
 	
 	@FXML
-	private ListView<String> pizzaList;
+	private ListView<String> pizzas;
 	
 	@FXML
-	private ListView<String> selectedPizzaList;
+	private ListView<String> toppings;
 	
 	@FXML
-	private ListView<String> extraToppingList;
+	private Label pizzaName;
 	
 	@FXML
-	private Label currentPizzaName;
+	private Label pizzaDescription;
 	
 	@FXML
-	private Label currentPizzaDescription;
+	private Label pizzaPrice;
 	
 	@FXML
-	private Label currentPriceLabel;
+	private Button addToppingButton;
 	
 	@FXML
-	private Label totalPriceLabel;
+	private Button removeToppingButton;
 	
 	@FXML
-	private Button orderButton;
+	private ListView<String> cart;
 	
 	@FXML
 	private Button addToCartButton;
 	
 	@FXML
-	private Button addExtraTopping;
+	private Label totalPrice;
 	
 	@FXML
-	private Button removeExtraTopping;
+	private Label toppingCountLabel;
 	
-	private double totalPrice;
+	@FXML
+	private Button orderButton;
 	
-	private Pizza currentPizza;
+	private double cartTotal;
 	
-	private double currentPrice;
+	private double pizzaTotal;
+	
+	// Topping -> Number of that topping.
+	private final HashMap<Topping, Integer> extraToppings = new HashMap<>();
+	
+	private Topping selectedTopping;
 	
 	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
+	public void initialize(URL location, ResourceBundle resources) {
 		
-		orderButton.setDisable(true);
+		Arrays.stream(Menu.PIZZAS).forEach(pizza -> pizzas.getItems().add(String.format("%s - %.2f kr.", pizza.name(), pizza.price())));
 		
-		totalPrice = 0;
-		
-		for (Pizza pizza : Menu.PIZZAS) {
+		pizzas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			
-			pizzaList.getItems().add(pizza.name());
-		}
-		
-		pizzaList.getSelectionModel().selectedItemProperty().addListener((observableValue, pizza, value) -> {
+			Pizza pizza = Menu.PIZZAS[pizzas.getSelectionModel().getSelectedIndex()];
 			
-			int index = Menu.pizzaIndexOf(value);
+			pizzaName.setText(pizza.name());
+			pizzaDescription.setText(pizza.description());
+			pizzaPrice.setText(String.format("%.2f kr.", pizza.price()));
+			pizzaTotal = pizza.getFullPrice();
 			
-			if (index == -1) {
-				
-				currentPizzaName.setText("Intet");
-				currentPizzaDescription.setText("Ingen");
-				currentPriceLabel.setText("0 kr.");
-				
-				currentPizza = null;
-				currentPrice = 0;
-				
-			} else {
-				
-				Pizza selectedPizza = Menu.PIZZAS[index];
-				
-				currentPizzaName.setText(selectedPizza.name());
-				currentPizzaDescription.setText(selectedPizza.description());
-				
-				currentPizza = selectedPizza;
-				currentPrice = selectedPizza.getFullPrice();
-			}
+			toppings.getItems().clear();
 			
-			updateSelectedPizzaPrice();
-			
-			// Disable the 'Tilføj til Kurv' button if no pizza is selected.
-			addToCartButton.setDisable(currentPizza == null);
-			
-			extraToppingList.getItems().clear();
-			
-			if (currentPizza != null) {
+			Arrays.stream(pizza.toppings()).forEach(topping -> {
 				
-				for (Topping topping : currentPizza.toppings()) {
+				String formattedTopping = String.format("%s - %.2f kr.", topping.name(), topping.price());
+				
+				if (!toppings.getItems().contains(formattedTopping)) {
 					
-					if (extraToppingList.getItems().contains(topping.name())) continue;
-					
-					extraToppingList.getItems().add(topping.name());
+					toppings.getItems().add(formattedTopping);
 				}
-				
-			} else {
-				
-				addExtraTopping.setDisable(true);
-				removeExtraTopping.setDisable(true);
-			}
+			});
+			
+			updatePizza();
 		});
 		
-		extraToppingList.getSelectionModel().selectedItemProperty().addListener((observableValue, topping, value) -> {
+		toppings.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			
-			addExtraTopping.setDisable(value == null);
-			removeExtraTopping.setDisable(value == null);
+			updatePizza();
+			
+			selectedTopping = Menu.TOPPINGS[toppings.getSelectionModel().getSelectedIndex()];
 		});
 	}
 	
-	@FXML
-	protected void onAddToCartButtonClicked() {
+	private void updatePizza() {
 		
-		selectedPizzaList.getItems().add(currentPizza.name());
+		double total = pizzaTotal;
 		
-		updateTotalPrice();
-	}
-	
-	@FXML
-	protected void onAddExtraToppingButtonClicked() {
-		
-		removeExtraTopping.setDisable(currentPrice == currentPizza.getFullPrice());
-		
-		String topping = extraToppingList.getSelectionModel().getSelectedItem();
-		
-		if (topping == null) return;
-		
-		int index = Menu.toppingIndexOf(topping);
-		
-		if (index == -1) return;
-		
-		currentPrice += Menu.TOPPINGS[index].price();
-		
-		updateSelectedPizzaPrice();
-	}
-	
-	@FXML
-	protected void onRemoveExtraToppingButtonClicked() {
-		
-		if (currentPrice == currentPizza.getFullPrice()) {
+		for (Topping topping : extraToppings.keySet()) {
 			
-			removeExtraTopping.setDisable(true);
-			
-			return;
+			total += topping.price() * extraToppings.get(topping);
 		}
 		
-		String topping = extraToppingList.getSelectionModel().getSelectedItem();
+		pizzaPrice.setText(String.format("%.2f kr.", total));
 		
-		if (topping == null) return;
+		int toppingCount = extraToppings.values().stream().mapToInt(Integer::intValue).sum();
 		
-		int index = Menu.toppingIndexOf(topping);
-		
-		if (index == -1) return;
-		
-		currentPrice -= Menu.TOPPINGS[index].price();
-		
-		updateSelectedPizzaPrice();
+		addToppingButton.setDisable(toppingCount >= Menu.MAX_EXTRA_TOPPINGS);
+		removeToppingButton.setDisable(toppingCount <= Menu.MIN_EXTRA_TOPPINGS);
 	}
 	
 	@FXML
-	protected void onOrderButtonClicked() {
+	protected void onAddToppingButtonClick() {
 		
-		String message = String.format("Du har bestilt %d %s til %.2f kr!",
-				selectedPizzaList.getItems().size(),
-				selectedPizzaList.getItems().size() == 1 ? "pizza" : "pizzaer",
-				totalPrice);
-		
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		
-		alert.setTitle("Bestilling Modtaget");
-		alert.setHeaderText("Vi har modtaget din bestilling!");
-		alert.setContentText(message);
-		alert.show();
+		extraToppings.put(selectedTopping, extraToppings.getOrDefault(selectedTopping, 0) + 1);
 	}
 	
-	private void updateSelectedPizzaPrice() {
+	@FXML
+	protected void onRemoveToppingButtonClick() {
 		
-		if (currentPizza == null) return;
-		
-		currentPriceLabel.setText(String.format("%.2f kr.", currentPrice));
+		extraToppings.put(selectedTopping, extraToppings.getOrDefault(selectedTopping, 0) - 1);
 	}
 	
-	private void updateTotalPrice() {
-		
-		totalPrice += currentPrice;
-		
-		totalPriceLabel.setText(String.format("Total Pris: %.2f kr.", totalPrice));
-		
-		orderButton.setDisable(totalPrice <= 0);
-		
-		currentPrice = currentPizza.getFullPrice();
-		
-		updateSelectedPizzaPrice();
+	@FXML
+	protected void onAddToCartButtonClick() {
+	
 	}
 }
