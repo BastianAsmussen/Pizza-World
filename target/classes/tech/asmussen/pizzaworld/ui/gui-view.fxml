@@ -32,17 +32,17 @@
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Label>
-		<Label fx:id="pizzaName" layoutX="586.0" layoutY="119.0" text="Intet">
+		<Label fx:id="pizzaNameLabel" layoutX="572.0" layoutY="119.0" text="Intet">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Label>
-		<Label fx:id="pizzaDescription" alignment="TOP_LEFT" layoutX="586.0" layoutY="135.0" prefHeight="81.0" prefWidth="132.0" text="Ingen" wrapText="true">
+		<Label fx:id="pizzaDescription" alignment="TOP_LEFT" layoutX="572.0" layoutY="135.0" prefHeight="81.0" prefWidth="132.0" text="Ingen" wrapText="true">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Label>
-		<Label fx:id="pizzaPrice" layoutX="586.0" layoutY="216.0" text="0 kr." textOverrun="WORD_ELLIPSIS">
+		<Label fx:id="pizzaPriceLabel" layoutX="576.0" layoutY="216.0" text="0 kr." textOverrun="WORD_ELLIPSIS">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
@@ -64,12 +64,12 @@
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Button>
-      <Button fx:id="orderButton" disable="true" layoutX="800.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#onAddToCartButtonClick" text="Bestil">
+      <Button fx:id="orderButton" disable="true" layoutX="800.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#onOrderButtonClick" text="Bestil">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="toppingCountLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" ellipsisString="99+" layoutX="503.0" layoutY="332.0" prefHeight="21.0" prefWidth="40.0" text="+0">
+      <Label fx:id="toppingCountLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" ellipsisString="" layoutX="488.0" layoutY="332.0" prefHeight="21.0" prefWidth="55.0" textOverrun="CLIP">
 	      <font>
 		      <Font name="Arial" size="18.0" />
 	      </font>

@@ -9,7 +9,7 @@ import com.google.gson.JsonArray;
 
 public final class Menu {
 	
-	public static final byte MAX_EXTRA_TOPPINGS = 5;
+	public static final byte MAX_EXTRA_TOPPINGS = 10;
 	public static final byte MIN_EXTRA_TOPPINGS = 0;
 	
 	public static final Topping[] TOPPINGS;
@@ -30,7 +30,6 @@ public final class Menu {
 		try {
 			
 			String line;
-			
 			while ((line = toppingsReader.readLine()) != null) {
 				
 				toppingJsonBuilder.append(line);
