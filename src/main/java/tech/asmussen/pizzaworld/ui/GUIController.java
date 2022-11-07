@@ -42,6 +42,9 @@ public class GUIController implements Initializable {
 	@FXML
 	private Button orderButton;
 	
+	@FXML
+	private Button showExtraToppingsButton;
+	
 	private double cartTotal;
 	private double pizzaTotal;
 	
@@ -139,6 +142,8 @@ public class GUIController implements Initializable {
 		totalPrice.setText("Total Pris: 0 kr.");
 		
 		orderButton.setDisable(true);
+		
+		resetPizza();
 	}
 	
 	private void resetPizza() {
@@ -167,6 +172,7 @@ public class GUIController implements Initializable {
 		
 		addToppingButton.setDisable(totalToppingCount >= Menu.MAX_EXTRA_TOPPINGS || selectedTopping == null);
 		removeToppingButton.setDisable(selectedToppingCount <= Menu.MIN_EXTRA_TOPPINGS);
+		showExtraToppingsButton.setDisable(totalToppingCount == 0 || selectedTopping == null);
 		
 		toppingCountLabel.setText(String.format("%d/%d", totalToppingCount, Menu.MAX_EXTRA_TOPPINGS));
 	}
@@ -212,6 +218,17 @@ public class GUIController implements Initializable {
 		resetCart();
 	}
 	
+	@FXML
+	protected void onShowExtraToppingsButtonClick() {
+		
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		
+		alert.setTitle(String.format("Ekstra Toppings (%s)", getTimeFormatted()));
+		alert.setHeaderText("Se dine valgte ekstra toppings.");
+		alert.getDialogPane().setContent(getExtraToppings());
+		alert.show();
+	}
+	
 	private DialogPane getReceipt() {
 		
 		VBox container = new VBox();
@@ -220,6 +237,39 @@ public class GUIController implements Initializable {
 		TextArea content = new TextArea();
 		
 		content.setText(String.join("\n", cart.getItems()));
+		content.setEditable(false);
+		content.setWrapText(true);
+		
+		container.getChildren().addAll(header, content);
+		
+		DialogPane dialogPane = new DialogPane();
+		
+		dialogPane.setContent(container);
+		
+		return dialogPane;
+	}
+	
+	private DialogPane getExtraToppings() {
+		
+		VBox container = new VBox();
+		
+		Label header = new Label("Ekstra Toppings");
+		TextArea content = new TextArea();
+		
+		ArrayList<String> formattedToppings = new ArrayList<>();
+		
+		for (Topping topping : extraToppings.keySet()) {
+			
+			int count = extraToppings.get(topping);
+			
+			if (count == 0) continue;
+			
+			double price = topping.price() * count;
+			
+			formattedToppings.add(String.format("%s x%d - %.2f kr.", topping.name(), count, price));
+		}
+		
+		content.setText(String.join("\n", formattedToppings));
 		content.setEditable(false);
 		content.setWrapText(true);
 		
