@@ -1,11 +1,11 @@
 package tech.asmussen.pizzaworld.menu;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Objects;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 public final class Menu {
 	
