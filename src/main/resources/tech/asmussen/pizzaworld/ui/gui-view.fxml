@@ -6,13 +6,13 @@
 
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.asmussen.pizzaworld.ui.GUIController">
 	<AnchorPane prefHeight="540" prefWidth="960">
-		<Label fx:id="totalPrice" alignment="TOP_LEFT" layoutX="755.0" layoutY="299.0" prefHeight="55.0" prefWidth="182.0" text="Total Pris: 0 kr." wrapText="true">
+		<Label fx:id="totalPrice" alignment="TOP_LEFT" layoutX="761.0" layoutY="397.0" prefHeight="55.0" prefWidth="182.0" text="Total pris: 0 kr." wrapText="true">
 			<font>
 				<Font name="Arial" size="18.0" />
 			</font>
 		</Label>
-		<ListView fx:id="pizzas" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="189.0" />
-		<Label layoutX="336.0" layoutY="64.0" text="Ret din Pizza">
+		<ListView fx:id="pizzas" layoutX="14.0" layoutY="73.0" prefHeight="451.0" prefWidth="189.0" />
+		<Label layoutX="336.0" layoutY="64.0" text="Ret din pizza">
 			<font>
 				<Font name="Arial" size="48.0" />
 			</font>
@@ -27,7 +27,7 @@
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Label>
-		<Label layoutX="340.0" layoutY="216.0" text="Pris for Pizza">
+		<Label layoutX="349.0" layoutY="216.0" text="Pizza pris">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
@@ -47,37 +47,47 @@
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Label>
-		<ListView fx:id="cart" layoutX="751.0" layoutY="15.0" prefHeight="276.0" prefWidth="189.0" />
-		<Button fx:id="addToCartButton" disable="true" layoutX="399.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#onAddToCartButtonClick" text="Tilføj til Kurv">
+		<ListView fx:id="cart" layoutX="757.0" layoutY="73.0" prefHeight="320.0" prefWidth="189.0" />
+		<Button fx:id="addToCartButton" disable="true" layoutX="400.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#onAddToCartButtonClick" text="Tilføj til kurv">
 			<font>
 				<Font name="Arial" size="24.0" />
 			</font>
 		</Button>
-		<ListView fx:id="toppings" layoutX="339.0" layoutY="246.0" prefHeight="81.0" prefWidth="283.0" />
-		<Button fx:id="addToppingButton" disable="true" layoutX="587.0" layoutY="329.0" mnemonicParsing="false" onMouseClicked="#onAddToppingButtonClick" text="+">
+		<ListView fx:id="toppings" layoutX="339.0" layoutY="246.0" prefHeight="117.0" prefWidth="283.0" />
+		<Button fx:id="addToppingButton" disable="true" layoutX="587.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#onAddToppingButtonClick" text="+">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Button>
-		<Button fx:id="removeToppingButton" disable="true" layoutX="549.0" layoutY="329.0" mnemonicParsing="false" onMouseClicked="#onRemoveToppingButtonClick" prefHeight="25.0" prefWidth="27.0" text="-">
+		<Button fx:id="removeToppingButton" disable="true" layoutX="552.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#onRemoveToppingButtonClick" prefHeight="25.0" prefWidth="27.0" text="-">
 			<font>
 				<Font name="Arial" size="14.0" />
 			</font>
 		</Button>
-      <Button fx:id="orderButton" disable="true" layoutX="800.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#onOrderButtonClick" text="Bestil">
+      <Button fx:id="orderButton" disable="true" layoutX="806.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#onOrderButtonClick" text="Bestil">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="toppingCountLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" ellipsisString="" layoutX="488.0" layoutY="332.0" prefHeight="21.0" prefWidth="55.0" textOverrun="CLIP">
+      <Label fx:id="toppingCountLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" ellipsisString="" layoutX="484.0" layoutY="371.0" prefHeight="21.0" prefWidth="55.0" textOverrun="CLIP">
 	      <font>
 		      <Font name="Arial" size="18.0" />
 	      </font>
       </Label>
-      <Button fx:id="showExtraToppingsButton" disable="true" layoutX="338.0" layoutY="330.0" mnemonicParsing="false" text="Se Ekstra Toppings" onMouseClicked="#onShowExtraToppingsButtonClick">
+      <Button fx:id="showExtraToppingsButton" disable="true" layoutX="341.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#onShowExtraToppingsButtonClick" text="Se ekstra toppings">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Button>
+      <Label layoutX="48.0" layoutY="14.0" text="Menu">
+         <font>
+            <Font name="Arial" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="803.0" layoutY="14.0" text="Kurv">
+         <font>
+            <Font name="Arial" size="48.0" />
+         </font>
+      </Label>
 	</AnchorPane>
 </VBox>

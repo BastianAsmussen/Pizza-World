@@ -4,15 +4,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import tech.asmussen.pizzaworld.PizzaWorld;
 import tech.asmussen.pizzaworld.menu.Menu;
 import tech.asmussen.pizzaworld.menu.Pizza;
 import tech.asmussen.pizzaworld.menu.Topping;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class GUIController implements Initializable {
+public class GUIController extends PizzaWorld implements Initializable {
+	
+	private static final DecimalFormat PRICE_FORMAT = new DecimalFormat("#,###.##");
+	private static final DecimalFormat QUANTITY_FORMAT = new DecimalFormat("#,###");
 	
 	// Topping -> Number of that topping.
 	private final HashMap<Topping, Integer> extraToppings = new HashMap<>();
@@ -53,7 +61,7 @@ public class GUIController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		Arrays.stream(Menu.PIZZAS).forEach(pizza -> pizzas.getItems().add(String.format("%s - %.2f kr.", pizza.name(), pizza.getFullPrice())));
+		Arrays.stream(Menu.PIZZAS).forEach(pizza -> pizzas.getItems().add(String.format("%s - %s", pizza.name(), PRICE_FORMAT.format(pizza.fullPrice()) + " kr.")));
 		
 		pizzas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			
@@ -65,14 +73,14 @@ public class GUIController implements Initializable {
 			
 			pizzaNameLabel.setText(pizza.name());
 			pizzaDescription.setText(pizza.description());
-			pizzaPriceLabel.setText(String.format("%.2f kr.", pizza.getFullPrice()));
-			pizzaTotal = pizza.getFullPrice();
+			pizzaPriceLabel.setText(PRICE_FORMAT.format(pizza.fullPrice()) + " kr.");
+			pizzaTotal = pizza.fullPrice();
 			
 			toppings.getItems().clear();
 			
 			Arrays.stream(pizza.toppings()).forEach(topping -> {
 				
-				String formattedTopping = String.format("%s - %.2f kr.", topping.name(), topping.price());
+				String formattedTopping = String.format("%s - %s", topping.name(), PRICE_FORMAT.format(topping.price()) + " kr.");
 				
 				if (!toppings.getItems().contains(formattedTopping)) {
 					
@@ -106,12 +114,12 @@ public class GUIController implements Initializable {
 		String rawPizzaPrice = pizzaPriceLabel.getText().split(" ")[0];
 		double pizzaPrice = Double.parseDouble(rawPizzaPrice.replaceAll(",", "."));
 		
-		cart.getItems().add(String.format("%s - %.2f kr.", pizza.name(), pizzaPrice));
+		cart.getItems().add(String.format("%s - %s", pizza.name(), PRICE_FORMAT.format(pizzaPrice) + " kr."));
 		cart.scrollTo(cart.getItems().size() - 1);
 		
 		cartTotal += pizzaPrice;
 		
-		totalPrice.setText(String.format("Total Pris: %.2f kr.", cartTotal));
+		totalPrice.setText(String.format("Total pris: %s", PRICE_FORMAT.format(cartTotal) + " kr."));
 		
 		resetPizza();
 		
@@ -127,7 +135,7 @@ public class GUIController implements Initializable {
 			total += topping.price() * extraToppings.get(topping);
 		}
 		
-		pizzaPriceLabel.setText(String.format("%.2f kr.", total));
+		pizzaPriceLabel.setText(PRICE_FORMAT.format(total) + " kr.");
 		
 		updateToppingButtons();
 		
@@ -139,7 +147,7 @@ public class GUIController implements Initializable {
 		cart.getItems().clear();
 		cartTotal = 0;
 		
-		totalPrice.setText("Total Pris: 0 kr.");
+		totalPrice.setText("Total pris: 0 kr.");
 		
 		orderButton.setDisable(true);
 		
@@ -150,7 +158,7 @@ public class GUIController implements Initializable {
 		
 		pizzaNameLabel.setText("Ingen.");
 		pizzaDescription.setText("Intet.");
-		pizzaPriceLabel.setText(String.format("%.2f kr.", 0.0));
+		pizzaPriceLabel.setText(PRICE_FORMAT.format(0) + " kr.");
 		pizzaTotal = 0;
 		
 		toppings.getItems().clear();
@@ -160,7 +168,7 @@ public class GUIController implements Initializable {
 		
 		updateToppingButtons();
 		
-		toppingCountLabel.setText(String.format("%d/%d", 0, Menu.MAX_EXTRA_TOPPINGS));
+		toppingCountLabel.setText(String.format("%d/%s", 0, QUANTITY_FORMAT.format(Menu.MAX_EXTRA_TOPPINGS)));
 		
 		addToCartButton.setDisable(true);
 	}
@@ -174,7 +182,7 @@ public class GUIController implements Initializable {
 		removeToppingButton.setDisable(selectedToppingCount <= Menu.MIN_EXTRA_TOPPINGS);
 		showExtraToppingsButton.setDisable(totalToppingCount == 0 || selectedTopping == null);
 		
-		toppingCountLabel.setText(String.format("%d/%d", totalToppingCount, Menu.MAX_EXTRA_TOPPINGS));
+		toppingCountLabel.setText(String.format("%s/%s", QUANTITY_FORMAT.format(totalToppingCount), QUANTITY_FORMAT.format(Menu.MAX_EXTRA_TOPPINGS)));
 	}
 	
 	@FXML
@@ -206,7 +214,7 @@ public class GUIController implements Initializable {
 	@FXML
 	protected void onOrderButtonClick() {
 		
-		String pizzaCount = String.format("%d %s", cart.getItems().size(), cart.getItems().size() == 1 ? "pizza" : "pizzaer");
+		String pizzaCount = String.format("%s %s", QUANTITY_FORMAT.format(cart.getItems().size()), cart.getItems().size() == 1 ? "pizza" : "pizzaer");
 		
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		
@@ -233,7 +241,7 @@ public class GUIController implements Initializable {
 		
 		VBox container = new VBox();
 		
-		Label header = new Label(String.format("Kvittering (%.2f kr.)", cartTotal));
+		Label header = new Label(String.format("Kvittering (%s)", PRICE_FORMAT.format(cartTotal) + " kr."));
 		TextArea content = new TextArea();
 		
 		content.setText(String.join("\n", cart.getItems()));
@@ -253,7 +261,10 @@ public class GUIController implements Initializable {
 		
 		VBox container = new VBox();
 		
-		Label header = new Label("Ekstra Toppings");
+		AtomicReference<Double> total = new AtomicReference<>((double) 0);
+		extraToppings.forEach((topping, count) -> total.updateAndGet(v -> v + topping.price() * count));
+		
+		Label header = new Label(String.format("Ekstra Toppings (%s)", PRICE_FORMAT.format(total.get()) + " kr."));
 		TextArea content = new TextArea();
 		
 		ArrayList<String> formattedToppings = new ArrayList<>();
@@ -266,7 +277,7 @@ public class GUIController implements Initializable {
 			
 			double price = topping.price() * count;
 			
-			formattedToppings.add(String.format("%s x%d - %.2f kr.", topping.name(), count, price));
+			formattedToppings.add(String.format("%s x%d - %s", topping.name(), count, PRICE_FORMAT.format(price) + " kr."));
 		}
 		
 		content.setText(String.join("\n", formattedToppings));
@@ -280,12 +291,5 @@ public class GUIController implements Initializable {
 		dialogPane.setContent(container);
 		
 		return dialogPane;
-	}
-	
-	private String getTimeFormatted() {
-		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy @ HH:mm");
-		
-		return format.format(new Date());
 	}
 }
