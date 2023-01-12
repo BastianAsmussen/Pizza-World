@@ -2,10 +2,8 @@ package tech.asmussen.pizzaworld.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,10 +21,8 @@ public class GUIApplication extends Application {
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(GUIApplication.class.getResource("gui-view.fxml"));
 		
-		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
-		
-		double width = visualBounds.getWidth() / 2;
-		double height = visualBounds.getHeight() / 2;
+		double width = 960;
+		double height = 520;
 		
 		Scene scene = new Scene(fxmlLoader.load(), width, height);
 		

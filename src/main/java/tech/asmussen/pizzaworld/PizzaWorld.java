@@ -15,11 +15,9 @@ public class PizzaWorld {
 		// Start the GUI in a new thread.
 		new Thread(() -> GUIApplication.main(args)).start();
 		
-		System.out.println("Program started successfully!");
-		
-		System.out.printf("Pizzas: %d%n", Menu.PIZZAS.length);
-		System.out.printf("Toppings: %d%n", Menu.TOPPINGS.length);
-		System.out.printf("Load Time: %d ms.%n", System.currentTimeMillis() - startTime);
+		System.out.printf("Pizzas    : %d%n", Menu.PIZZAS.length);
+		System.out.printf("Toppings  : %d%n", Menu.TOPPINGS.length);
+		System.out.printf("Load Time : %d ms.%n", System.currentTimeMillis() - startTime);
 	}
 	
 	public static String getTimeFormatted() {

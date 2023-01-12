@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public final class Menu {
 	
-	public static final byte MAX_EXTRA_TOPPINGS = 10;
-	public static final byte MIN_EXTRA_TOPPINGS = 0;
+	public static final int MAX_EXTRA_TOPPINGS = 10;
+	public static final int MIN_EXTRA_TOPPINGS = 0;
 	
 	public static final Topping[] TOPPINGS;
 	public static final Pizza[] PIZZAS;
@@ -20,7 +20,7 @@ public final class Menu {
 		Topping[] toppings;
 		Pizza[] pizzas;
 		
-		// Load the toppings from Toppings.json and the pizzas from Pizzas.json.
+		// Load the toppings from Toppings.json and the pizzas from Pizzas.json. Notify if there is an error.
 		BufferedReader toppingsReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Menu.class.getResourceAsStream("Toppings.json"), "Toppings.json not found!")));
 		BufferedReader pizzasReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Menu.class.getResourceAsStream("Pizzas.json"), "Pizzas.json not found!")));
 		
@@ -47,11 +47,9 @@ public final class Menu {
 			Gson gson = new Gson();
 			
 			JsonArray jsonToppings = gson.fromJson(toppingJsonBuilder.toString(), JsonArray.class);
-			
 			toppings = gson.fromJson(jsonToppings, Topping[].class);
 			
 			JsonArray jsonPizzas = gson.fromJson(pizzasJsonBuilder.toString(), JsonArray.class);
-			
 			pizzas = new Pizza[jsonPizzas.size()];
 			
 			for (int i = 0; i < jsonPizzas.size(); i++) {
@@ -64,7 +62,6 @@ public final class Menu {
 				double price = jsonPizzas.get(i).getAsJsonObject().get("price").getAsDouble();
 				
 				JsonArray jsonToppingIds = jsonPizzas.get(i).getAsJsonObject().get("toppings").getAsJsonArray();
-				
 				Topping[] pizzaToppings = new Topping[jsonToppingIds.size()];
 				
 				for (int j = 0; j < jsonToppingIds.size(); j++) {
